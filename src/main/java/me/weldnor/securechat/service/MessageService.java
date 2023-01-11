@@ -15,8 +15,8 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public List<Message> getMessages() {
-        return messageRepository.findAll();
+    public List<Message> getMessages(String key1, String key2) {
+        return messageRepository.getMessagesByKeys(key1, key2);
     }
 
     public void addMessage(Message message) {

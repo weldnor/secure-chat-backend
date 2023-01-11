@@ -9,6 +9,8 @@ public class Message {
     @Id
     private ObjectId id;
 
+    public String from;
     private String to;
-    private String message;
+
+    private String text;
 }

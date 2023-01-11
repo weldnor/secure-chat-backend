@@ -17,8 +17,8 @@ public class MessageController {
     }
 
     @GetMapping
-    public List<Message> getMessages() {
-        return messageService.getMessages();
+    public List<Message> getMessages(@RequestParam String key1, @RequestParam String key2) {
+        return messageService.getMessages(key1, key2);
     }
 
     @PutMapping
