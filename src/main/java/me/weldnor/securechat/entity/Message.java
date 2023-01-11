@@ -13,4 +13,6 @@ public class Message {
     private String to;
 
     private String text;
+
+    private boolean read;
 }
