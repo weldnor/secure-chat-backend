@@ -16,7 +16,17 @@ public class MessageService {
     }
 
     public List<Message> getMessages(String key1, String key2) {
+        markMessagesAsRead(key1,key2);
         return messageRepository.getMessagesByKeys(key1, key2);
+    }
+
+    public void markMessagesAsRead(String key1, String key2) {
+        var messages = messageRepository.getMessagesByKeys(key1, key2).stream()
+                .filter(message -> message.getTo().equals(key1))
+                .peek(message -> message.setRead(true))
+                .toList();
+
+        messageRepository.saveAll(messages);
     }
 
     public void addMessage(Message message) {
