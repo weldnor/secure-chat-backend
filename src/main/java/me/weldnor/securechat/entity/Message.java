@@ -14,5 +14,7 @@ public class Message {
 
     private String text;
 
+    private long timestamp; // unix time
+
     private boolean read;
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 public class Chat {
     public String key;
     private String lastMessageText;
-    private String lastMessageFrom;
-    private long lastMessageDate;
+    private String lastMessageKey;
+    private long lastMessageTimestamp;
     private long unread;
 }
