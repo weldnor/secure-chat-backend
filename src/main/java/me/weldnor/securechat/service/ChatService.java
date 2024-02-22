@@ -17,7 +17,7 @@ public class ChatService {
     private MessageRepository messageRepository;
 
     public List<Chat> getChats(String key) {
-        var friendKeys = messageRepository.findAll().stream()
+        var friendKeys = messageRepository.findAll().parallelStream()
                 .filter(message -> message.getFrom().equals(key) || message.getTo().equals(key))
                 .flatMap(message -> Stream.of(message.getFrom(), message.getTo()))
                 .filter(s -> !s.equals(key))
@@ -35,8 +35,8 @@ public class ChatService {
             chat.setLastMessageText(lastMessage.getText());
             chat.setLastMessageKey(lastMessage.from);
 
-            var friendMessages = allMessages.stream().filter(message -> !message.getFrom().equals(key)).toList();
-            var unreadMessagesCount = friendMessages.stream().filter(message -> !message.isRead()).count();
+            var friendMessages = allMessages.parallelStream().filter(message -> !message.getFrom().equals(key)).toList();
+            var unreadMessagesCount = friendMessages.parallelStream().filter(message -> !message.isRead()).count();
             chat.setUnread(unreadMessagesCount);
             chat.setLastMessageTimestamp(lastMessage.getId().getTimestamp());
             chats.add(chat);

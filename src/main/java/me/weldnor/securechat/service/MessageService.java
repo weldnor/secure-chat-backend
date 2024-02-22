@@ -21,7 +21,7 @@ public class MessageService {
     }
 
     public void markMessagesAsRead(String key1, String key2) {
-        var messages = messageRepository.getMessagesByKeys(key1, key2).stream()
+        var messages = messageRepository.getMessagesByKeys(key1, key2).parallelStream()
                 .filter(message -> message.getTo().equals(key1))
                 .peek(message -> message.setRead(true))
                 .toList();
